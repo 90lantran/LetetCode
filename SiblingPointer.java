@@ -32,28 +32,67 @@ public class SiblingPointer {
 				if (temp.left != null && temp.right != null) {
 					q.add(temp.left);
 					q.add(temp.right);
-					temp.left.sibling = temp.right;
-					if (temp.val < q.peek().val) {
-						temp.right.sibling = q.peek().left;
+					if (temp.val > q.peek().val){
+						System.out.println("\n");
 					}
 				}
-				
 				
 			}
 		}
 
 	}
+	
+	static void addSibling(Node node){
+		if (node != null) {
+			Queue<Node> q = new LinkedList<Node>();
+			q.add(node);
+
+			while (!q.isEmpty()) {
+				Node current = q.remove();
+
+				//System.out.print(temp.val + " ");
+				
+				if (q.peek() != null && q.peek().val > current.val){
+				current.sibling = q.peek();
+				
+				}
+
+				if (current.left != null && current.right != null ){
+					q.add(current.left);
+					q.add(current.right);
+				}
+			}	
+			
+		}
+		
+	}
+	
+	static void testAddSibling(Node current){
+		while (current != null){
+			System.out.println(current.val);
+			Node travel = current;
+			
+			while (travel.sibling != null){
+				System.out.println(travel.sibling.val);
+				travel = travel.sibling;
+			}
+			current = current.left;
+		}
+	}
+	
 
 	public static void main(String[] args) {
 		BST tree = new BST();
 		tree.insert(20);
 		tree.insert(15);
 		tree.insert(34);
-		tree.insert(1);
+		tree.insert(10);
 		tree.insert(16);
 
 		tree.insert(22);
 		tree.insert(36);
-		printByLevel(tree.root);
+		//printByLevel(tree.root);
+		addSibling(tree.root);
+		testAddSibling(tree.root);
 	}
 }
