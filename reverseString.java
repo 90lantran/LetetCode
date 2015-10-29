@@ -29,10 +29,9 @@ public class reverseString {
 		}
 
 		for (int i = 0; i < s.length(); i++) {
-			if (map.get(s.charAt(i)) != null) {
+			if (map.get(s.charAt(i)) != null && map.get(s.charAt(i)) > 0) {
 				map.put(s.charAt(i), map.get(s.charAt(i)) - 1);
-			} else if (map.get(s.charAt(i)) == null
-					|| map.get(s.charAt(i)) == 0) {
+			} else  {
 				return false;
 			}
 		}
@@ -73,17 +72,22 @@ public class reverseString {
 				map.put(str.charAt(i), 1);
 			}
 		}
-		for(Character c: map.keySet()){
-			System.out.println(c);
+		StringBuilder s = new StringBuilder();
+		for (Character c : map.keySet()){
+			s.append(c).append(map.get(c));
 		}
-		return null;
+//		for(Character c: map.keySet()){
+//			System.out.println(c);
+//		}
+//		return null;
+		return s.toString();
 	}
 
 	public static void main(String[] args) {
 		System.out.println(reverse("Hello"));
 		System.out.println(replaceWhiteSpace("Mr John Smith   "));
 		
-		System.out.println("Mr 23    ".length());
+		//System.out.println("Mr 23    ".length());
 		System.out.println(compressString("Hello"));
 	}
 }
